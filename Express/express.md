@@ -8,8 +8,8 @@
 
 - Irá usar o npm  
 
-<li>https://www.npmjs.com/package/express</li>
-<li>http://expressjs.com/</li>
+https://www.npmjs.com/package/express
+http://expressjs.com/
 
 # Npm
 
