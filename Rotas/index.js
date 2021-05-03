@@ -28,12 +28,18 @@ app.get("/", function(req, res){
         - send; serve para enviar alguma coisa.
         - Atraves da função send dentro do objeto res que vem de resposta está enviando a mensagem. 
     */
-    res.send("Seja bem-vindo ao meu app!");
+
+    /*
+        - sendFile; enviar arquivos.
+        - __dirname; essa variável vai retornar diretório padrão da aplicação.
+        - Vai retornar diretório absoluto da aplicação.
+    */
+    res.sendFile(__dirname + "/html/index.html");
 });
 
 //Função de callback/rota 2
 app.get("/sobre", function(req, res){
-    res.send("Minha página sobre");
+    res.sendFile(__dirname + "/html/sobre.html");
 })
 
 //Função de callback/rota 3
