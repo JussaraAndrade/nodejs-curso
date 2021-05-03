@@ -41,6 +41,27 @@ app.get("/blog", function(req, res){
     res.send("Bem-vindo ao meu blog!")
 })
 
+/*
+ Rotas com parâmetros:
+ - A partir dos dois pontos, criar os parametros.
+
+ - Req; é a primeira variável que cria na função de callback.
+ Ela é responsavel por receber todos dados de um requisição.
+
+ - Atraves do objeto req consegue obter dados da requisição 
+ que foi feita, inclusive o parâmetro.
+
+ Informações importantes:
+
+ - Você só pode chamar função send() em uma única vez, 
+   dentro de uma função de uma rotas.
+*/
+app.get('/ola/:cargo/:nome/:cor', function(req, res){
+    res.send("<h1>Ola " +req.params.nome+ "</h1>"
+            + "<h2> Seu cargo e: " +req.params.cargo+ "</h2>"
+            + "<h3> Sua cor favorite e: " +req.params.cor+ "</h2>");
+ 
+})
 
 
 /* 
@@ -49,6 +70,6 @@ app.get("/blog", function(req, res){
 */
 // última linha do código
 app.listen(8081, function(){
-    console.log("Servidor Rodando na url http://localhost:8081");
+    console.log("Servidor Rodando!");
 });
 
