@@ -32,7 +32,7 @@ Cria o banco de dados:
    USE sistemaDeCadastro;
 ```
 
-* Dentro de cada banco de dados, existem estrutura de dados chamadas tabelas.
+* Dentro de cada banco de dados, existem estrutura de dados chamada tabela.
 
 * Uma tabela serve para guardar dados.
 
@@ -54,7 +54,7 @@ Cria o banco de dados:
    SHOW TABLES;
 ```
 
-### Cria tabelas
+### Cria tabela
 ```js
    CREATE TABLE usuarios(
     nome VARCHAR(50),
