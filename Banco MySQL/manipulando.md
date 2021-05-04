@@ -24,13 +24,13 @@
     SELECT * FROM usuarios WHERE idade = 8;
 ```
 
-#### Consulta com nome
+#### Consulta com nome:
 
 ```js
     SELECT * FROM usuarios WHERE nome = "Lucas";
 ```
 
-#### Retorne apenas usuários maiores de 18 anos
+#### Retorne apenas usuários maiores de 18 anos:
 
 ```js
     SELECT * from usuarios where idade >= 18;
