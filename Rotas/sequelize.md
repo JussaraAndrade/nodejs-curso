@@ -33,3 +33,12 @@ Desenvolver primeira aplicação express com ajuda do MySQL.
 ```js
     npm i mysql2
 ```
+
+## ORM
+
+O sequelize é um ORM, é um sistema que abstrai toda camada de banco de dados.
+
+* Não precisa digitar queires longas tipo select ...
+* Sequelize faz isso automaticamente, facilita muito o trabalho com banco de dados.
+* Gera tabela de forma facilitada
+
