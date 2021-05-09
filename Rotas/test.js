@@ -6,32 +6,48 @@ const sequelize = new Sequelize('test', 'root', 'root', {
     dialect: 'mysql'
 })
 
+// Definindo model 
+const Postagem = sequelize.define('postagens', {
+    // Campo 1
+    titulo:{
+        // tipo de string; tem um limite de tamanho de caracteres
+        type: Sequelize.STRING    
+    },
+    // Campo 2
+    conteudo:{
+        // tipo de texto; tamanho do caracter é ilimitado  
+        type: Sequelize.TEXT
+    }
+})
 
-/*
-    Função callback:
+//Postagem.sync({force: true})
 
-    then; funciona como se fosse uma função callback.
-    Ela é uma função especial, que é executada quando algum
-    evento acontece.
+//Model Usuário
 
-    sequelize.authenticate; essa função quando ela tenta se
-    conectar ao banco de dados, ela só pode ter dois resultados
-    sucesso ou falha.
+const Usuario = sequelize.define('usuarios', {
+    nome:{
+        type: Sequelize.STRING
+    },
+    sobrenome:{
+        type: Sequelize.STRING
+    },
+    idade: {
+            type: Sequelize.INTEGER
+    },
+    email: {
+        type: Sequelize.STRING
+    }
+})
 
-    Cenário de execução:
+//Usuario.sync({force: true})*/
 
-    Caso consiga autenticar no banco de dados com sucesso a função
-    que vai ser chamada, vai ser a função then().
+Usuario.create({
+    nome: "Jussara",
+    sobrenome: "Andrade",
+    idade: 27,
+    email: "jussaraandrade@gmail.com"
+})
 
-    Caso ocorra uma falha ou algum erro qualquer a função que vai
-    ser chamada vai ser no catch().
-
-    Informações importantes:
-
-    Função then() e catch() fazem parte de um paradigma chamado programação
-    assíncrona
-
-*/
 
 //Testar para ver se o banco tá conectando
 sequelize.authenticate().then(function(){
