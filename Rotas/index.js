@@ -14,6 +14,11 @@ const sequelize = new Sequelize('test', 'root', 'root', {
     dialect: 'mysql'
 })
 
+// Rotas
+app.get('/cad', function(req, res){
+    res.render('formulario')
+})
+
 // última linha do código
 app.listen(8081, function(){
     console.log("Servidor Rodando!");
