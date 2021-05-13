@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const handlebars = require('express-handlebars')
 const bodyParser = require('body-parser')
+const Post = require('./models/Post')
 
 
 //Config
@@ -9,19 +10,44 @@ const bodyParser = require('body-parser')
     app.engine('handlebars', handlebars({defaultLayout: 'main'}))
     app.set('view engine', 'handlebars')
     // Configuração do Body Parser
-    app.use(bodyParser.urlencoded({defaultLayout: 'main'}))
+    app.use(bodyParser.urlencoded({extended: false}))
     app.use(bodyParser.json())
 
 
 // Rotas
+    // Redirecionamento de página home
+    app.get('/', function(req, res){
+        res.render('home')
+    })
+
+
 app.get('/cad', function(req, res){
     res.render('formulario')
 })
 
 app.post('/add', function(req, res){
-    // Pega o dado que foi enviado para o formulário
-    res.send("Text: " +req.body.titulo+ " Conteudo: " +req.body.conteudo)
+    // Quando o processo de criação for finalizado
+    Post.create({
+        titulo: req.body.titulo,
+        conteudo: req.body.conteudo
+    }).then(function(){
+    /*
+        Caso tenha ocorrido com sucesso, a função then() vai ser chamada e vai executar:
+        res.send("Post criado com sucesso!") 
+    */
+
+        //Redireciona diretamente para página home
+        res.redirect('/')
+    }).catch(function(erro){
+        /* 
+        Caso tenha acontecido alguma falha durante o processo de criação do usuário
+        a função que vai ser chamada é a catch(): 
+         */
+        res.send("Houve um erro: " +erro)
+    })
 })
+
+
 
 // última linha do código
 app.listen(8081, function(){
