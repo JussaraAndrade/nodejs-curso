@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const handlebars = require('express-handlebars')
 const bodyParser = require('body-parser')
-const Sequelize = require('sequelize')
+
 
 //Config
     // Template Engine
@@ -11,11 +11,7 @@ const Sequelize = require('sequelize')
     // Configuração do Body Parser
     app.use(bodyParser.urlencoded({defaultLayout: 'main'}))
     app.use(bodyParser.json())
-// Conexão com banco de dados Mysql
-const sequelize = new Sequelize('test', 'root', 'root', {
-    host: "localhost",
-    dialect: 'mysql'
-})
+
 
 // Rotas
 app.get('/cad', function(req, res){
