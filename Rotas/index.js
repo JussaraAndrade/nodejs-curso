@@ -17,7 +17,13 @@ const Post = require('./models/Post')
 // Rotas
     // Redirecionamento de página home
     app.get('/', function(req, res){
-        res.render('home')
+        // Retorna todos os post que exitem dentro do banco de dados
+        // then(); ele recebe todos os Post
+        // Post.findaAll() - é um array de post
+        Post.findAll({order: [['id', 'ASC']]}).then(function(posts){
+            console.log(posts)
+            res.render('home', {posts: posts})
+        }) 
     })
 
 
