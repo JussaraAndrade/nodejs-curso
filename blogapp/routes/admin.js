@@ -4,7 +4,7 @@ const router = express.Router()
 
 // Grupo de rotas
 router.get('/', (req, res) => {
-    res.send('Página principal do painel ADM')
+    res.render('admin/index')
 })
 
 router.get('/posts', (req, res) => {

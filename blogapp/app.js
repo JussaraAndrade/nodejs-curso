@@ -8,6 +8,9 @@
     const app = express()
     // importa o arquivo que vem da pasta routes
     const admin = require('./routes/admin')
+    // carrega um módulo chamado path padrão do node
+    const path = require('path')
+
     //const 
 // Configurações
     // Body Parser
@@ -18,6 +21,11 @@
         app.set('view engine', 'handlebars')
     // Mysql
         // Em Breve
+    // Public 
+        // tá falando para express que está aguardando todos os arquivos estáticos da pasta public
+                                        // caminho absoluto
+        app.use(express.static(path.join(__dirname, "public")))
+        
 
 // Rotas
     app.get('/', (req, res) => {
