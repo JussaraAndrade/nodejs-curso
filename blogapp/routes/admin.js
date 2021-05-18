@@ -12,7 +12,11 @@ router.get('/posts', (req, res) => {
 })
 
 router.get('/categorias', (req, res) =>{
-    res.send("Página de categoria")
+    res.render('admin/categorias')
+})
+
+router.get('/categorias/add', (req, res) => {
+    res.render('admin/addcategorias')
 })
 
 // No final do arquivo precisa exportar o router
