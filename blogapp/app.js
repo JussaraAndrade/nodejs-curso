@@ -10,6 +10,7 @@
     const admin = require('./routes/admin')
     // carrega um módulo chamado path padrão do node
     const path = require('path')
+    const Sequelize = require('sequelize')
 
     //const 
 // Configurações
@@ -20,7 +21,17 @@
         app.engine('handlebars', handlebars({defaultLayout: 'main'}))
         app.set('view engine', 'handlebars')
     // Mysql
-        // Em Breve
+    const sequelize = new Sequelize('test', 'root', 'root', {
+        host: "localhost",
+        dialect: 'mysql'
+    })
+    //Evitar qualquer tipo de erro
+    sequelize.Promise = global.Promise;
+    sequelize.authenticate().then(() => {
+        console.log("Conectado com sucesso!")
+    }).catch(function(erro){
+        console.log("Falha ao se conectar: " +erro)
+    }) 
     // Public 
         // tá falando para express que está aguardando todos os arquivos estáticos da pasta public
                                         // caminho absoluto
