@@ -29,7 +29,7 @@
 
 - Recomenda-se deixar pelo menos um cmd aberto e o outro para digitar comandos.
 
-Digitando o comando para abrir o servidor mongoose, digite no terminal:
+Digitando o comando para gerar os arquivos dentro da pasta `db`, digite no terminal:
 
 ```
     mongod
@@ -86,4 +86,33 @@ Digitando o comando para abrir o servidor mongoose, digite no terminal:
     then(() => {}).catch()
 ```
 
+### Executando o Mongo em tempo real
 
+1 - execução do mongo
+
+```js
+    mongo
+```
+
+2 - Lista do banco de dados
+
+```js
+    show databases;
+```
+3 - Seleciona o banco
+
+```js
+    use nomeBanco;
+```
+
+4 - Mostra as tabelas criadas
+
+```js
+    show collections;
+```
+
+5 - Lista todos os usuários que existe
+
+```js
+    db.usuarios.find()
+````
