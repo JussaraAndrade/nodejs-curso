@@ -37,6 +37,15 @@ mongoose
 // caminho absoluto
 app.use(express.static(path.join(__dirname, "public")));
 
+
+// Middlewares 
+app.use((req, res, next) => {
+  console.log('Oi eu sou um middleware');
+
+  //significa próximo, não esqueça de colocar o next()
+  next()
+})
+
 // Rotas
 app.get("/", (req, res) => {
   res.send("Rota principal");
