@@ -1,0 +1,9 @@
+{{!--  Se exisitr uma mensagem de sucesso faça alguma coisa--}}
+{{#if success_msg}}
+    <div class="alert alert-success">{{success_msg}}</div>
+{{/if}}
+
+{{!-- Se houve erro apresenta a mensagem --}}
+{{#if error_msg}}
+    <div class="alert alert-danger">{{error_msg}}</div>
+{{/if}}

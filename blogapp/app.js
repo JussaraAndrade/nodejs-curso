@@ -12,6 +12,7 @@ const admin = require("./routes/admin");
 const path = require("path");
 const mongoose = require("mongoose");
 const session = require("express-session");
+// flash é um tipo de sessão que só aparece uma vez, quando usuário carrega a página ela não está mais lá
 const flash = require("connect-flash");
 
 

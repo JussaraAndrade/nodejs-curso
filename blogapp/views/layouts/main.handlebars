@@ -8,8 +8,10 @@
     <title>Blog NodeJS</title>
 </head>
 <body>
+    {{!-- Chama a página em html da partials --}}
     {{>_navbar}}
     <div class="container mt-4">
+        {{>_msg}}
         {{{body}}}
     </div>
     
