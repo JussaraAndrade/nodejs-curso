@@ -15,8 +15,16 @@ router.get('/posts', (req, res) => {
     res.send('Página de posts')
 })
 
-router.get('/categorias', (req, res) =>{
-    res.render('admin/categorias')
+// Lista
+router.get('/categorias', (req, res) => {
+    // find(); é uma função que vai listar todos os documentos que existe, ou seja, toda categoria que existe
+    // sort(); listar os post pelo campo date em ordem decrescente (mais novo para o mais antigo)
+    Categoria.find().sort({date: 'desc'}).then((categorias) => {
+        res.render('admin/categorias', {categorias: categorias.map(categoria => categoria.toJSON())})
+    }).catch((err) => {
+        req.flash("error_msg", "Houve um erro ao listar as categorias")
+        res.redirect("/admin")
+    })
 })
 
 router.post('/categorias/nova', (req, res) => {
