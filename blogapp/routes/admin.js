@@ -27,6 +27,7 @@ router.get('/categorias', (req, res) => {
     })
 })
 
+// Insere 
 router.post('/categorias/nova', (req, res) => {
     var erros = []
     // Validação - não quero que o usuário envie formulários vázios
@@ -82,9 +83,40 @@ router.post('/categorias/nova', (req, res) => {
     }
 })
 
+// Edição
+router.get("/categorias/edit/:id", (req, res) => {
+    // findOne; irá busca o registro que tem o id único
+    Categoria.findById({_id: req.params.id}).lean().then((categoria) => {
+        res.render("admin/editcategorias", {categoria: categoria})
+    }).catch((err) => {
+        // Caso ele não tenha achado a categoria pelo id
+        req.flash("error_msg", "Esta categoria não existe")
+        res.redirect("/admin/categorias")
+    })
+})
+
+router.post("/categorias/edit", (req, res) =>{
+    Categoria.findById({_id: req.body.id}).then((categoria) => {
+        // Pegar o campo nome e atribuir
+        categoria.nome = req.body.nome
+        categoria.slug = req.body.slug
+
+        categoria.save().then(() => {
+            req.flash("success_msg", "Categoria editada com sucesso!")
+            res.redirect("/admin/categorias")
+        }).catch((err) => {
+            req.flash("error_msg", "Houve um erro interno ao salvar a edição da categoria")
+            res.redirect("/admin/categorias")
+        })
+
+    })
+})
+
 router.get('/categorias/add', (req, res) => {
     res.render('admin/addcategorias')
 })
+
+
 
 // No final do arquivo precisa exportar o router
 module.exports = router
