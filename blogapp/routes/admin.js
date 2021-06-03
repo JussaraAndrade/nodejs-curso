@@ -4,6 +4,7 @@ const mongoose = require("mongoose")
 require('../models/Categoria')
 // função de referência da variável
 const Categoria = require("../models/Categoria")
+const validaCampos = require("../validator.js")
 
 
 // Grupo de rotas
@@ -29,7 +30,6 @@ router.get('/categorias', (req, res) => {
 
 // Insere 
 router.post('/categorias/nova', (req, res) => {
-    var erros = []
     // Validação - não quero que o usuário envie formulários vázios
     // !req.body.nome; se não for enviado o nome
 
@@ -47,16 +47,9 @@ router.post('/categorias/nova', (req, res) => {
         Obs: irá registrar uma mensagem de erro
 
     */
-    if(!req.body.nome || typeof req.body.nome == undefined || req.body.nome == null){
-        // Toda array tem função de push, ele serve para colocar um novo dado dentro do array
-        erros.push({texto: "Nome inválido"})
-    }
-    if(!req.body.slug || typeof req.body.slug == undefined || req.body.slug == null){
-        erros.push({texto: "Slug inválido"})
-    }
-    if(req.body.nome.length < 2){
-        erros.push({texto: "Nome da categoria é muito pequeno"})
-    }
+
+    let erros = validaCampos(req.body)
+
     // se existir mais de um erro
     if(erros.length > 0){
         res.render("admin/addcategorias", {erros: erros})
@@ -95,8 +88,9 @@ router.get("/categorias/edit/:id", (req, res) => {
     })
 })
 
-router.post("/categorias/edit", (req, res) =>{
+router.post("/categorias/edit", (req, res) => {
     Categoria.findById({_id: req.body.id}).then((categoria) => {
+
         // Pegar o campo nome e atribuir
         categoria.nome = req.body.nome
         categoria.slug = req.body.slug
