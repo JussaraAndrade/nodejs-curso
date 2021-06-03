@@ -7,19 +7,16 @@ let verifica = (dados) => {
             texto: "Nome inválido"
         })
     }
-
     if(dados.nome.length < 2){
         erros.push({
             texto: "Nome da categoria é muito pequeno. "
         })
     }
-
     if(!dados.slug || typeof dados.slug == undefined || dados.slug == null){
         erros.push({
             texto: "Slug inválido"
         })
     }
-
     return erros;
 }
 
