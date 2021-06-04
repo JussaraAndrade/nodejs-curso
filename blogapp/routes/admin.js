@@ -1,12 +1,9 @@
 // Esse componente que usa para criar rotas em arquivos separados
 const router = require('express').Router()
-
-const mongoose = require("mongoose")
 require('../models/Categoria')
-// função de referência da variável
 const Categoria = require("../models/Categoria")
 require('../models/Postagem')
-const Postagem = mongoose.model("postagens")
+const Postagem = require("../models/Postagem")
 
 const validaCampos = require("../validator.js")
 
@@ -124,9 +121,16 @@ router.post("/categorias/deletar", (req, res) => {
     })
 })
 
-router.get("/postagens", (req, res) => {
-    res.render("admin/postagens")
-})
+
+router.get('/postagens', (req, res) => {
+    Postagem.find().lean().populate('categoria').sort({data: 'desc'}).then((postagens) => {
+        res.render('admin/postagens', {postagens: postagens})
+    }).catch((err) => {
+        req.flash('error_msg', 'Erro ao listar os posts')
+        res.render('/admin')
+    })
+}) 
+    
 
 router.get("/postagens/add", (req, res) => {
     Categoria.find().lean().then((categorias) => {
