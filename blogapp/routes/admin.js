@@ -1,9 +1,13 @@
 // Esse componente que usa para criar rotas em arquivos separados
 const router = require('express').Router()
+
 const mongoose = require("mongoose")
 require('../models/Categoria')
 // função de referência da variável
 const Categoria = require("../models/Categoria")
+require('../models/Postagem')
+const Postagem = mongoose.model("postagens")
+
 const validaCampos = require("../validator.js")
 
 
@@ -131,6 +135,35 @@ router.get("/postagens/add", (req, res) => {
         req.flash("error_msg", "Houve um erro ao carregar o formulário")
         res.redirect("/admin")
     })
+})
+
+router.post("/postagens/nova", (req, res) => {
+    let erros = []
+
+    if(req.body.categoria == "0" || typeof req.body.categoria == undefined || req.body.categoria == null){      
+        erros.push({texto: "Categoria inválida, registre um categoria" })
+    }
+    
+    if(erros.length > 0){
+        res.render("admin/addpostagem", {erros: erros})
+    }else{
+
+        const novaPostagem = {
+            titulo: req.body.titulo,
+            descricao: req.body.descricao,
+            conteudo: req.body.conteudo,
+            categoria: req.body.categoria,
+            slug: req.body.slug
+        }
+        new Postagem(novaPostagem).save().then(() => {
+            req.flash("success_msg", "Postagem criada com sucesso!")
+            res.redirect("/admin/postagens")
+        }).catch((err) => {
+            req.flash('error_msg', "Houve um erro durante o salvamento da postagem")
+            res.redirect("/admin/postagens")
+        })
+
+    }
 })
 
 
