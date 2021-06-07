@@ -18,6 +18,7 @@ require("./models/Postagem")
 const Postagem = mongoose.model("postagens")
 require("./models/Categoria")
 const Categoria = mongoose.model("categorias")
+const usuarios = require("./routes/usuario")
 
 
 /*
@@ -146,6 +147,7 @@ app.get("/404", (req, res) => {
 
 // prefixo: /admin
 app.use("/admin", admin);
+app.use("/usuarios", usuarios);
 
 // const urlencodedParse = bodyParser.urlencoded({extended:false});
 // app.use("/admin", urlencodedParse, admin);
