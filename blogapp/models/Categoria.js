@@ -4,11 +4,11 @@ const Schema = mongoose.Schema;
 const Categoria = new Schema({
     nome: {
         type: String,
-        required: false
+        required: true
     },
     slug: {
         type: String,
-        required: false
+        required: true
     },
     date: {
         type: Date,

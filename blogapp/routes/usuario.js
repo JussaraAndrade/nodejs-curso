@@ -41,7 +41,6 @@ router.post("/registro", (req, res) => {
     if(erros.length > 0){
         res.render("usuarios/registro", {erros: erros})
     }else{
-        //Pesquinsando um usuário que tem um email igual, caso o usuário tentar se cadastrar 
         Usuario.findOne({email: req.body.email}).then((usuario) => {
             if(usuario){
                 req.flash("error_msg", "Já existe um conta com esse e-mail no nosso sistema")
@@ -52,14 +51,14 @@ router.post("/registro", (req, res) => {
                     email: req.body.email,
                     senha: req.body.senha
                 })
-                // decriptar a senha
+               
                 bcrypt.genSalt(10, (erro, salt) => {
                     bcrypt.hash(novoUsuario.senha, salt, (erro, hash) => {
                         if(erro){
                             req.flash("error_msg", "Houve um erro durante o salvamento do usuário")
                             res.redirect("/")
                         }
-                        // pegando atributo senha do novoUsuario, falando a senha do novoUsuario vai ser igual hash que foi gerado
+                       
                         novoUsuario.senha = hash
 
                         novoUsuario.save().then(() => {
@@ -84,11 +83,8 @@ router.get("/login", (req, res) => {
 })
 
 router.post("/login", (req, res, next) => {
-    // essa função sempre que for autenticar alguma coisa
     passport.authenticate("local", {
-        // qual o caminho que irá ser encaminhado assim que autenticar o usuário
         successRedirect: "/",
-        // caso tenha ocorrido alguma falha durante a autenticação
         failureRedirect: "/usuarios/login",
         failureFlash: true
     })(req, res, next)

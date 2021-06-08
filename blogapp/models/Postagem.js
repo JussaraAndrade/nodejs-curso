@@ -19,8 +19,6 @@ const Postagem = new Schema({
         required: true
     },
     categoria: {
-        // Referencia entre dois documentos Postagem/Categoria
-        // Categoria vai armazenar um id
         type: Schema.Types.ObjectId,
         ref: "categorias",
         required: true
