@@ -15,27 +15,20 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/">Home</a>
+          <a class="nav-link" href="/">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active"  href="/categorias">Categoria</a>
+          <a class="nav-link"  href="/categorias">Categorias</a>
+        </li>
+        {{#if user}}
+        {{else}}
+        <li class="nav-item">
+          <a class="nav-link" href="/usuarios/login">Login</a>
         </li>
         <li class="nav-item">
-          <a
-            class="nav-link active"
-            href="#"
-            tabindex="-1"
-            aria-disabled="true"
-          >Login</a>
+          <a class="nav-link" href="/usuarios/registro">Registro</a>
         </li>
-        <li class="nav-item">
-          <a
-            class="nav-link active"
-            href="#"
-            tabindex="-1"
-            aria-disabled="true"
-          >Registro</a>
-        </li>
+        {{/if}}
       </ul>
 
     </div>

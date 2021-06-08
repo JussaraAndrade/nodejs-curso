@@ -26,7 +26,7 @@ module.exports = function(passport) {
     }))
     // Serve para salvar os dados do usuário numa sessão
     passport.serializeUser((usuario, done) => {
-        done(null, usuario.id)
+        done(null, usuario)
     })
 
     passport.deserializeUser((id, done) => {

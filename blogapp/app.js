@@ -19,7 +19,8 @@ const Postagem = mongoose.model("postagens")
 require("./models/Categoria")
 const Categoria = mongoose.model("categorias")
 const usuarios = require("./routes/usuario")
-const passport = require("passport")
+const passport = require("passport");
+const eAdmin = require("./helpers/eAdmin");
 require("./config/auth")(passport)
 
 
@@ -48,7 +49,11 @@ app.use((req, res, next) => {
   //variaveis globais; são variáveis que consegue acessar em qualquer parte da aplicação
   res.locals.success_msg = req.flash("success_msg")
   res.locals.error_msg = req.flash("error_msg")
-  res.locals.error_msg = req.flash("error")
+  res.locals.error = req.flash("error")
+  // Essa variável user irá armazenar os dados do usuário autenticado
+  // req.use; ele é uma coisa que o passport cria automaticamente que armazena dados daquele usuario logado
+  // req.use || null; caso não exista nenhum usuário logado o que vai ser passado com essa variável vai ser o valor null
+  res.locals.user = req.user || null;
   next()
 })
 
