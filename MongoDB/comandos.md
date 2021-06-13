@@ -116,3 +116,10 @@ Digitando o comando para gerar os arquivos dentro da pasta `db`, digite no termi
 ```js
     db.usuarios.find()
 ````
+
+6 - Deletar databases (base de dados - documentos)
+
+```js
+    use nomeBanco;
+    db.dropDatabase();
+````
